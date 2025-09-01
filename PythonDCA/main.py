@@ -269,11 +269,13 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DIST_DIR = os.path.join(BASE_DIR, "dist")
 
 if not os.path.exists(DIST_DIR):
     raise RuntimeError(f"Directory '{DIST_DIR}' does not exist")
+
 
 main_instance = None
 
@@ -397,3 +399,18 @@ async def replace(data: dict):
         return JSONResponse({ "image": img_b64 })
     except Exception as e:
         return {"error": str(e)}
+    
+@app.get("/{full_path:path}")
+async def serve_react(full_path: str):
+    """
+    Sert le build React : index.html pour toutes les routes non API,
+    et les fichiers statiques du build si existants.
+    """
+    requested_path = os.path.join(DIST_DIR, full_path)
+
+    if os.path.exists(requested_path) and os.path.isfile(requested_path):
+        # Si c'est un fichier réel (JS/CSS/images), on le renvoie
+        return FileResponse(requested_path)
+    else:
+        # Sinon, renvoie toujours index.html pour que React gère le routage
+        return FileResponse(os.path.join(DIST_DIR, "index.html"))
