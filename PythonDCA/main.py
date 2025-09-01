@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse, StreamingResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import JSONResponse, StreamingResponse, FileResponse
+import os
 import base64
 import io
 from .picture import Picture
@@ -267,6 +269,13 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "dist")), name="static")
+
+@app.get("/")
+def index():
+    return FileResponse(os.path.join(BASE_DIR, "dist/index.html"))
 
 main_instance = None
 
