@@ -1,13 +1,16 @@
 import openpyxl
 import pandas as pd
 from math import sqrt
+import os
 
 class dataChart:
-    def __init__(self):        
-        self.wb = openpyxl.load_workbook("./DMCcharts2025.xlsx", data_only=True)
+    def __init__(self):
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        file_path = os.path.join(BASE_DIR, "DMCcharts2025.xlsx")
+        self.wb = openpyxl.load_workbook(file_path, data_only=True)
         self.ws = self.wb.active
 
-        self.df = pd.read_excel("./DMCcharts2025.xlsx")
+        self.df = pd.read_excel(file_path)
 
     def createRGBcol(self):   
         colors_rgb = []
