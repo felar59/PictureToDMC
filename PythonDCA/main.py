@@ -271,7 +271,9 @@ app.add_middleware(
 )
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "dist")), name="static")
+dist_path = os.path.abspath(os.path.join(BASE_DIR, "../dist"))
+
+app.mount("/static", StaticFiles(directory=dist_path), name="static")
 
 @app.get("/")
 def index():
