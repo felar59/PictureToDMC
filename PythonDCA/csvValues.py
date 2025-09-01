@@ -4,10 +4,10 @@ from math import sqrt
 
 class dataChart:
     def __init__(self):        
-        self.wb = openpyxl.load_workbook("DMCcharts2025.xlsx", data_only=True)
+        self.wb = openpyxl.load_workbook("./DMCcharts2025.xlsx", data_only=True)
         self.ws = self.wb.active
 
-        self.df = pd.read_excel("DMCcharts2025.xlsx")
+        self.df = pd.read_excel("./DMCcharts2025.xlsx")
 
     def createRGBcol(self):   
         colors_rgb = []
