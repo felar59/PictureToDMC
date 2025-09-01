@@ -271,12 +271,12 @@ app.add_middleware(
 )
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-dist_path = os.path.abspath(os.path.join(BASE_DIR, "../dist"))
+dist_path = os.path.abspath(os.path.join(BASE_DIR, "dist"))
 
 if not os.path.exists(dist_path):
     raise RuntimeError(f"Directory '{dist_path}' does not exist")
 
-app.mount("/", StaticFiles(directory=os.path.join(BASE_DIR, "../dist"), html=True), name="frontend")
+app.mount("/", StaticFiles(directory=dist_path, html=True), name="frontend")
 
 main_instance = None
 
