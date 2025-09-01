@@ -276,7 +276,7 @@ dist_path = os.path.abspath(os.path.join(BASE_DIR, "../dist"))
 if not os.path.exists(dist_path):
     raise RuntimeError(f"Directory '{dist_path}' does not exist")
 
-app.mount("/", StaticFiles(directory=os.path.join(BASE_DIR, "dist"), html=True), name="frontend")
+app.mount("/", StaticFiles(directory=os.path.join(BASE_DIR, "../dist"), html=True), name="frontend")
 
 main_instance = None
 
