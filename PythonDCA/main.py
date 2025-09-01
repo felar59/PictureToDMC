@@ -3,8 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
 import base64
 import io
-from picture import Picture
-from csvValues import dataChart
+from .picture import Picture
+from .csvValues import dataChart
 from PIL import Image, ImageDraw, ImageFilter, ImageChops, ImageFont
 import numpy as np
 from math import sqrt
