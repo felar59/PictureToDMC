@@ -275,7 +275,7 @@ app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "dist")), name
 
 @app.get("/")
 def index():
-    return FileResponse(os.path.join(BASE_DIR, "dist/index.html"))
+    return FileResponse(os.path.join(BASE_DIR, "../dist/index.html"))
 
 main_instance = None
 
