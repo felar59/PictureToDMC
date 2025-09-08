@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse, StreamingResponse, FileResponse
@@ -414,3 +415,8 @@ async def serve_react(full_path: str):
     else:
         # Sinon, renvoie toujours index.html pour que React gère le routage
         return FileResponse(os.path.join(DIST_DIR, "index.html"))
+    
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 10000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
